@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des salariés
+{% endblock %}
+
+{% block body %}
+	<style>
+		table{
+            border-collapse: collapse;
+        }
+
+		td,th{
+			padding: 1em;
+            border: 1px solid black;
+        }
+	</style>
+
+	<div
+		class="example-wrapper">
+{% block contenu %}
+		<h1>Liste des salariés</h1>
+
+		<a class="btn btn-primary" href="{{ path('salaries_add') }}"> Ajouter un salarié</a>
+
+		<table>
+
+			<thead>
+				<tr>
+					<th>SALARIE</th>
+					<th>ADRESSE</th>
+					<th>CP</th>
+					<th>VILLE</th>
+					<th>DATE EMBAUCHE</th>
+					<th>ENTREPRISE</th>
+					<th>ACTION</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for salarie in salaries %}
+				
+				</tbody>
+				<tr>
+					<td><a href="{{ path('salarie_show', {'id':salarie.id}) }}">{{ salarie.nom ~' '~ salarie.prenom }}</a></td>
+					<td>{{ salarie.adresse }}</td>
+					<td>{{ salarie.cp }}</td>
+					<td>{{ salarie.ville }}</td>
+					<td>{{ salarie.dateEmbauche | date('d/m/Y') }}</td>
+					<td>{{ salarie.entreprise.raisonSociale }}</td>
+					<td><a class="btn btn-primary" href="{{ path('salaries_edit', {'id':salarie.id}) }}">Modifier</a>
+					<a class="btn btn-danger" href="{{ path('salarie_delete', {'id':salarie.id}) }}">Supprimer</a></td>
+				</tr>
+                {% endfor %}
+			</tbody> 
+		</table>
+
+	</div>
+{% endblock %}
+{% endblock %}

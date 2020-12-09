@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Détail salarié
+{% endblock %}
+{% block body %}
+	<style>
+        table{
+            border-collapse: collapse;
+        }
+
+        td,th{
+            padding: 1em;
+            border: 1px solid black;
+        }
+	</style>
+
+	<div class="example-wrapper">
+		{% block contenu %}
+			<h1>Détail d'un salarié</h1>
+
+			<table>
+
+				<thead>
+					<tr>
+						<th>NOM PRENOM</th>
+						<th>DATE DE NAISSANCE</th>
+                        <th>DATE DE D'EMBAUCHE</th>
+                        <th>ENTREPRISE</th>
+						<th>ADRESSE</th>
+						<th>CP</th>
+						<th>VILLE</th>
+                        
+					</tr>
+				</thead>
+				<tbody>
+					
+					
+					</tbody>
+					<tr>
+						<td>
+							<a href="{{ path('salarie_show', {'id':salarie.id}) }}">{{ salarie.prenom }}</a>
+						</td>
+						<td>{{ salarie.dateNaissance | date('d/m/Y') }}</td>
+                        <td>{{ salarie.dateEmbauche | date('d/m/Y') }}</td>
+                        <td>{{ salarie.entreprise.raisonSociale }}</td>
+						<td>{{ salarie.adresse }}</td>
+						<td>{{ salarie.cp }}</td>
+						<td>{{ salarie.ville }}</td>
+                        
+					</tr>
+				
+			</tbody>
+
+		</table>
+		<h3>Collègues de {{ salarie.prenom }}</h3>
+
+		<ul>
+		{% for collegue in salarie.collegues %}
+			<li><a href="{{ path('salarie_show', {'id':collegue.id}) }}">{{ collegue }}</a></li>
+		{% endfor %}
+
+		</ul>
+
+	
+
+	</div>
+{% endblock %}{% endblock %}
